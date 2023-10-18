@@ -11,14 +11,13 @@
 /* Landing Page */
 
 body {
-  margin: 0;
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
   background-image: url("background.png");
   font-family: var(--font-default);
   font-size: 18px;
   max-width: 1300px;
-  margin: 0 auto;
 }
 
 p {
@@ -336,7 +335,7 @@ input[data-error]::after {
 /* custom select styles */
 .custom-select {
   position: relative;
-  font-family: Arial;
+  font-family: Arial, sans-serif;
   font-size: 1.1rem;
   font-weight: normal;
 }
