@@ -226,14 +226,20 @@ main {
     margin: 15px auto;
 }
 
+input[data-error]::after {
+    content: attr(data-error);
+    font-size: 6.6em;
+    color: red;
+}
+
 .formData[data-error]::after {
     content: attr(data-error);
-    font-size: 0.4em;
+    font-size: 0.6em;
     color: #e54858;
     display: block;
     margin-top: 7px;
     margin-bottom: 7px;
-    text-align: right;
+    text-align: left;
     line-height: 0.3;
     opacity: 0;
     transition: 0.3s;
@@ -244,7 +250,7 @@ main {
 }
 
 .formData[data-error-visible="true"] .text-control {
-    border: 2px solid #e54858;
+    border: 3px solid #e54858;
 }
 
 label {
@@ -270,12 +276,6 @@ label {
     padding: 12px 0;
 }
 
-/*
-input[data-error]::after {
-    content: attr(data-error);
-    font-size: 0.4em;
-    color: red;
-} */
 .checkbox-label,
 .checkbox2-label {
     position: relative;
@@ -350,13 +350,6 @@ input[data-error]::after {
     top: 27%;
 }
 
-
-
-
-
-
-
-
 footer {
     padding-left: 2vw;
     padding-right: 2vw;
@@ -419,11 +412,6 @@ footer {
         display: none;
     }
 
-    .topnav a.icon {
-        float: right;
-        display: block;
-    }
-
     .topnav.responsive {
         position: relative;
     }
@@ -447,7 +435,7 @@ footer {
     .topnav a.icon {
         float: right;
         display: block;
-        margin-top: -15px;
+        /*margin-top: -15px;*/
     }
 }
 
