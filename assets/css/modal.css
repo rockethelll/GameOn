@@ -23,7 +23,8 @@ body {
 
 .topnav {
     overflow: hidden;
-    margin: 3.5%;
+    /*margin: 3.5%;*/
+    margin: 3.5% 0 3.5% 3.5%;
 }
 
 .topnav a:hover {
@@ -44,7 +45,7 @@ body {
 
 .topnav .icon {
     display: none;
-    /*color: #ff0000;*/
+    color: #ff0000;
 }
 
 .topnav a {
@@ -381,6 +382,46 @@ footer {
     font-weight: bolder;
 }
 
+@media screen and (max-width: 1000px) {
+    .topnav {
+        margin: 3.5%;
+    }
+
+    .topnav a {
+        display: none;
+    }
+
+    .topnav.responsive {
+        position: relative;
+    }
+
+    .topnav.responsive .icon {
+        position: absolute;
+        right: 0;
+        top: 0;
+    }
+
+    .topnav.responsive a {
+        float: none;
+        display: block;
+        text-align: left;
+    }
+
+    .topnav.responsive a:first-child {
+        margin-top: 60px;
+    }
+
+    .hero-headline {
+        font-size: clamp(3rem, 4vw, 4rem);
+        font-weight: 800;
+    }
+
+    .topnav a.icon {
+        float: right;
+        display: block;
+    }
+}
+
 @media screen and (max-width: 800px) {
     .hero-section {
         display: block;
@@ -404,7 +445,7 @@ footer {
 
     .hero-text {
         width: unset;
-        font-size: 1.5rem;
+        font-size: 1.4rem;
     }
 
     .hero-img img {
@@ -419,44 +460,16 @@ footer {
     }
 
     .copyrights {
-        margin-top: 50px;
+        margin-top: 20px;
+        font-size: 12px;
         text-align: center;
     }
 }
 
-@media screen and (max-width: 1050px) {
-    .main-navbar {
-        width: 40%;
-    }
-
-    .topnav a {
-        display: none;
-    }
-
-    .topnav.responsive {
-        position: relative;
-    }
-
-    .topnav.responsive .icon {
-        position: absolute;
-        right: 0;
-        top: 0;
-    }
-
-    .topnav.responsive a {
-        float: none;
-        display: block;
-        text-align: left;
-    }
-
-    .hero-headline {
-        font-size: clamp(3rem, 4vw, 4rem);
-    }
-
-    .topnav a.icon {
-        float: right;
-        display: block;
-        /*margin-top: -15px;*/
+/* This part only for dropdown menu display when menu hit the logo */
+@media screen and (min-width: 280px) and (width < 540px) {
+    .topnav.responsive a:first-child {
+        margin-top: 10px;
     }
 }
 

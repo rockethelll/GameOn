@@ -9,7 +9,7 @@ const navbar = document.querySelector(".main-navbar");
 const links = navbar.querySelectorAll(".main-navbar a:not(.icon)");
 let formValid = true;
 
-function addActiveClass() {
+function addActiveClassLink() {
   links.forEach((link) => {
     link.addEventListener("click", function (e) {
       links.forEach(function (link) {
@@ -20,7 +20,7 @@ function addActiveClass() {
   });
 }
 
-addActiveClass();
+addActiveClassLink();
 
 // Hide navbar on mobile and display burger menu dropdown
 function editNav() {
@@ -122,7 +122,7 @@ function validateLocation() {
   location.dataset.error = locationChecked ? "" : "Veuillez choisir une ville";
   location.dataset.errorVisible = locationChecked ? "false" : "true";
 
-  formValid = isValid ? formValid : false;
+  formValid = locationChecked ? formValid : false;
 }
 
 function validatConditions() {
@@ -133,7 +133,7 @@ function validatConditions() {
   conditionsDiv.dataset.error = conditionsChecked ? "" : "Veuillez accepter les conditions d'utilisation";
   conditionsDiv.dataset.errorVisible = conditionsChecked ? "false" : "true";
 
-  formValid = isValid ? formValid : false;
+  formValid = conditionsChecked ? formValid : false;
 }
 
 function congrats() {
