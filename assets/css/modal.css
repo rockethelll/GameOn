@@ -424,7 +424,11 @@ footer {
     }
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 1050px) {
+    .main-navbar {
+        width: 40%;
+    }
+
     .topnav a {
         display: none;
     }

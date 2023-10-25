@@ -5,7 +5,22 @@ const btnSignup = document.querySelectorAll(".btn-signup");
 const formData = document.querySelectorAll(".formData");
 const btnClose = document.querySelector(".close");
 const form = document.querySelector("form");
+const navbar = document.querySelector(".main-navbar");
+const links = navbar.querySelectorAll(".main-navbar a:not(.icon)");
 let formValid = true;
+
+function addActiveClass() {
+  links.forEach((link) => {
+    link.addEventListener("click", function (e) {
+      links.forEach(function (link) {
+        link.classList.remove("active");
+      });
+      link.classList.add("active");
+    });
+  });
+}
+
+addActiveClass();
 
 // Hide navbar on mobile and display burger menu dropdown
 function editNav() {
@@ -81,7 +96,7 @@ function validateBirthdate() {
 
   parentFormData.dataset.error = isValid ? "" : "Veuillez entrer une date de naissance";
   parentFormData.dataset.errorVisible = isValid ? "false" : "true";
-  
+
   formValid = isValid ? formValid : false;
 }
 
@@ -140,9 +155,9 @@ function congrats() {
 // send form
 form.addEventListener("submit", (e) => {
   e.preventDefault();
-  
+
   formValid = true;
-  
+
   validateFields("first", "Le prénom doit contenir au moins 2 caractères");
   validateFields("last", "Le nom doit contenir au moins 2 caractères")
   validateEmail()
@@ -150,7 +165,7 @@ form.addEventListener("submit", (e) => {
   validateQuantity()
   validateLocation();
   validatConditions()
-  
+
   // if all fields are valid, display congrats message
   formValid ? congrats() : null;
 });
