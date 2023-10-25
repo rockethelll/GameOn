@@ -35,6 +35,7 @@ function editNav() {
 // display modal form
 function launchModal() {
   modalbg.style.display = "block";
+  form.reset();
 }
 
 // launch modal event
@@ -43,6 +44,7 @@ btnSignup.forEach((btn) => btn.addEventListener("click", launchModal));
 // close modal event and reset form
 function closeModal() {
   modalbg.style.display = "none";
+  form.reset();
   window.location.reload();
 }
 
