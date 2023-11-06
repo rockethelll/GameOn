@@ -2,12 +2,10 @@
 const modalbg = document.querySelector(".bground");
 const modalBody = document.querySelector('.modal-body');
 const btnSignup = document.querySelectorAll(".btn-signup");
-const formData = document.querySelectorAll(".formData");
 const btnClose = document.querySelector(".close");
 const form = document.querySelector("form");
 const navbar = document.querySelector(".main-navbar");
 const links = navbar.querySelectorAll(".main-navbar a:not(.icon)");
-const topnav = document.querySelector(".topnav");
 let formValid = true;
 
 function addActiveClassLink() {
@@ -27,18 +25,15 @@ addActiveClassLink();
 function editNav() {
   const myTopnav = document.getElementById("myTopnav");
   if (myTopnav.className === "topnav") {
-    myTopnav.className += " responsive displayNav";
-  } else if (myTopnav.className === "topnav displayNav")
     myTopnav.className += " responsive";
-  else {
-    myTopnav.className = "topnav displayNav";
+  } else {
+    myTopnav.className = "topnav";
   }
 }
 
 // display modal form
 function launchModal() {
   modalbg.style.display = "block";
-  topnav.classList.add("displayNav")
   form.reset();
 }
 
@@ -48,7 +43,6 @@ btnSignup.forEach((btn) => btn.addEventListener("click", launchModal));
 // close modal event and reset form
 function closeModal() {
   modalbg.style.display = "none";
-  topnav.classList.remove("displayNav")
   form.reset();
   window.location.reload();
 }
@@ -90,8 +84,7 @@ function dateOfTheDay() {
   const year = today.getFullYear();
   const month = String(today.getMonth() + 1).padStart(2, '0');
   const day = String(today.getDate()).padStart(2, '0');
-  const formattedDate = `${year}-${month}-${day}`;
-  return formattedDate;
+  return `${year}-${month}-${day}`;
 }
 
 function validateBirthdate() {
@@ -176,4 +169,3 @@ form.addEventListener("submit", (e) => {
   // if all fields are valid, display congrats message
   formValid ? congrats() : null;
 });
-

@@ -23,6 +23,7 @@ body {
 
 .topnav {
     overflow: hidden;
+    /*margin: 3.5%;*/
     margin: 3.5% 0 3.5% 3.5%;
 }
 
@@ -172,6 +173,7 @@ main {
     height: 100%;
     width: 100%;
     overflow: auto;
+    /*background-color: rgba(26, 39, 156, 0.4);*/
     background-color: #fff;
 }
 
@@ -462,35 +464,6 @@ footer {
         font-size: 12px;
         text-align: center;
     }
-}
-
-@media screen and (max-width: 550px) {
-    .bground {
-        padding-top: 95px;
-    }
-
-    .topnav.displayNav {
-        position: fixed;
-        width: 100%;
-        background-color: white;
-        box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
-        z-index: 2;
-        padding: 3.5%;
-        margin: 0;
-    }
-
-    .main-navbar {
-        z-index: 2;
-    }
-
-    .content {
-        display: block;
-        margin: 0;
-        padding: 0;
-        z-index: 0;
-        border-radius: 10px 10px 0 0;
-    }
-
 }
 
 /* This part only for dropdown menu display when menu hit the logo */
