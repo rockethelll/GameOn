@@ -6,6 +6,8 @@ const btnClose = document.querySelector(".close");
 const form = document.querySelector("form");
 const navbar = document.querySelector(".main-navbar");
 const links = navbar.querySelectorAll(".main-navbar a:not(.icon)");
+const menuBurger = document.querySelector(".icon");
+const navLinks = document.querySelector(".nav-links");
 let formValid = true;
 
 function addActiveClassLink() {
@@ -22,14 +24,20 @@ function addActiveClassLink() {
 addActiveClassLink();
 
 // Hide navbar on mobile and display burger menu dropdown
-function editNav() {
-  const myTopnav = document.getElementById("myTopnav");
-  if (myTopnav.className === "topnav") {
-    myTopnav.className += " responsive";
-  } else {
-    myTopnav.className = "topnav";
-  }
-}
+menuBurger.addEventListener("click", () => {
+  navLinks.classList.toggle("mobile-menu");
+  navLinks.classList.toggle("hide-menu");
+  menuBurger.classList.toggle("mobile-menu");
+});
+
+// function editNav() {
+//   const myTopnav = document.getElementById("myTopnav");
+//   if (myTopnav.className === "topnav") {
+//     myTopnav.className += " responsive";
+//   } else {
+//     myTopnav.className = "topnav";
+//   }
+// }
 
 // display modal form
 function launchModal() {
