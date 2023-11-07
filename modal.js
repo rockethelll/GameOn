@@ -30,15 +30,6 @@ menuBurger.addEventListener("click", () => {
   menuBurger.classList.toggle("mobile-menu");
 });
 
-// function editNav() {
-//   const myTopnav = document.getElementById("myTopnav");
-//   if (myTopnav.className === "topnav") {
-//     myTopnav.className += " responsive";
-//   } else {
-//     myTopnav.className = "topnav";
-//   }
-// }
-
 // display modal form
 function launchModal() {
   modalbg.style.display = "block";
@@ -46,7 +37,13 @@ function launchModal() {
 }
 
 // launch modal event
-btnSignup.forEach((btn) => btn.addEventListener("click", launchModal));
+btnSignup.forEach((btn) => btn.addEventListener("click", () => {
+  window.scrollTo({
+    top: 0,
+    behavior: 'smooth'
+  })
+  launchModal()
+}));
 
 // close modal event and reset form
 function closeModal() {
@@ -58,7 +55,12 @@ function closeModal() {
 // close modal form
 btnClose.addEventListener("click", closeModal);
 
-// check validity of fields
+// function to update formValid in order to display congrats message
+function updateFormValid(isValid) {
+  formValid = isValid ? formValid : false;
+}
+
+// check validity of fields name and lastname
 function validateFields(inputId, errorMessage) {
   const input = document.getElementById(inputId);
   const regex = /^[a-zA-Z-éèïëëî]{2,}$/;
@@ -71,7 +73,7 @@ function validateFields(inputId, errorMessage) {
   parentFormData.dataset.errorVisible = isValid ? "false" : "true";
 
   // if one field is not valid, formValid = false
-  formValid = isValid ? formValid : false;
+  updateFormValid(isValid);
 }
 
 function validateEmail() {
@@ -84,7 +86,7 @@ function validateEmail() {
   parentFormData.dataset.error = isValid ? "" : "Veuillez entrer une adresse email valide";
   parentFormData.dataset.errorVisible = isValid ? "false" : "true";
 
-  formValid = isValid ? formValid : false;
+  updateFormValid(isValid);
 }
 
 function dateOfTheDay() {
@@ -105,7 +107,7 @@ function validateBirthdate() {
   parentFormData.dataset.error = isValid ? "" : "Veuillez entrer une date de naissance";
   parentFormData.dataset.errorVisible = isValid ? "false" : "true";
 
-  formValid = isValid ? formValid : false;
+  updateFormValid(isValid);
 }
 
 function validateQuantity() {
@@ -117,7 +119,7 @@ function validateQuantity() {
   parentFormData.dataset.error = isValid ? "" : "Veuillez entrer un nombre valide";
   parentFormData.dataset.errorVisible = isValid ? "false" : "true";
 
-  formValid = isValid ? formValid : false;
+  updateFormValid(isValid);
 }
 
 function validateLocation() {
@@ -125,23 +127,23 @@ function validateLocation() {
   const locationArray = form.elements.location;
 
   // some() return true if at least one radio is checked
-  const locationChecked = [...locationArray].some(radio => radio.checked);
+  const isValid = [...locationArray].some(radio => radio.checked);
 
-  location.dataset.error = locationChecked ? "" : "Veuillez choisir une ville";
-  location.dataset.errorVisible = locationChecked ? "false" : "true";
+  location.dataset.error = isValid ? "" : "Veuillez choisir une ville";
+  location.dataset.errorVisible = isValid ? "false" : "true";
 
-  formValid = locationChecked ? formValid : false;
+  updateFormValid(isValid);
 }
 
-function validatConditions() {
+function validateConditions() {
   const conditionsDiv = document.querySelector(".conditions");
   const conditions = document.getElementById("checkbox1");
-  const conditionsChecked = conditions.checked;
+  const isValid = conditions.checked;
 
-  conditionsDiv.dataset.error = conditionsChecked ? "" : "Veuillez accepter les conditions d'utilisation";
-  conditionsDiv.dataset.errorVisible = conditionsChecked ? "false" : "true";
+  conditionsDiv.dataset.error = isValid ? "" : "Veuillez accepter les conditions d'utilisation";
+  conditionsDiv.dataset.errorVisible = isValid ? "false" : "true";
 
-  formValid = conditionsChecked ? formValid : false;
+  updateFormValid(isValid);
 }
 
 function congrats() {
@@ -172,7 +174,7 @@ form.addEventListener("submit", (e) => {
   validateBirthdate()
   validateQuantity()
   validateLocation();
-  validatConditions()
+  validateConditions()
 
   // if all fields are valid, display congrats message
   formValid ? congrats() : null;

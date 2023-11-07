@@ -23,8 +23,8 @@ body {
 
 .topnav {
     overflow: hidden;
-    height: 100px;
-    margin: 25px;
+    height: 80px;
+    margin: 25px 25px 0 25px;
 }
 
 .topnav a:hover {
@@ -192,7 +192,6 @@ main {
     top: 15px;
     width: 32px;
     height: 32px;
-    /*opacity: 1;*/
     cursor: pointer;
     transform: scale(0.7);
     animation-name: modalClose;
@@ -218,7 +217,7 @@ main {
 }
 
 .modal-body {
-    padding: 15px 6%;
+    padding: 10px 6%;
     margin: 15px auto;
 }
 
@@ -378,10 +377,6 @@ footer {
 }
 
 @media screen and (max-width: 1000px) {
-    .topnav {
-        height: 100px;
-    }
-
     .topnav .main-navbar .icon {
         cursor: pointer;
         display: flex;
@@ -392,7 +387,7 @@ footer {
         position: absolute;
         width: 50px;
         height: 50px;
-        top: 25px;
+        top: 27px;
         right: 40px;
         z-index: 1;
     }
@@ -427,16 +422,6 @@ footer {
         box-shadow: 0 0 10px 10px rgba(73, 70, 70, 0.2);
         border-radius: 7px;
         z-index: 2;
-    }
-    
-    @keyframes showMenu {
-        from {
-            opacity: 0;
-            transform: translateY(-100px);
-        }
-        to {
-            opacity: 1;
-        }
     }
 }
 
@@ -484,17 +469,73 @@ footer {
     }
 }
 
-/* This part only for dropdown menu display when menu hit the logo */
-/*@media screen and (min-width: 280px) and (max-width:  540px) {*/
-/*    .topnav.responsive a:first-child {*/
-/*        margin-top: 10px;*/
-/*    }*/
-/*}*/
+@media screen and (max-width: 550px) {
+    .topnav {
+        z-index: 5;
+    }
+
+    .bground {
+        margin-top: 80px;
+    }
+
+    .content {
+        height: 100%;
+    }
+
+    .modal-content {
+        height: 600px;
+    }
+
+    .text-control {
+        padding: 8px;
+        font-size: 18px;
+        height: 50px;
+    }
+
+    label {
+        margin: 10px 15px 10px 0;
+    }
+
+    .checkbox-label .checkbox-icon,
+    .checkbox2-label .checkbox-icon {
+        width: 20px;
+        height: 20px;
+    }
+
+    .checkbox-label .checkbox-icon::after,
+    .checkbox2-label .checkbox-icon::after {
+        width: 14px;
+        height: 14px;
+    }
+
+    .checkbox-label,
+    .checkbox2-label {
+        margin-right: 10px;
+        padding-left: 0;
+    }
+
+    .checkbox2-label .checkbox-icon::after {
+        width: 7px;
+        height: 4px;
+        left: 25%;
+        top: 20%;
+    }
+}
 
 @keyframes modalOpen {
     from {
         opacity: 0;
         transform: translateY(-150px);
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes showMenu {
+    from {
+        opacity: 0;
+        transform: translateY(-100px);
     }
     to {
         opacity: 1;
