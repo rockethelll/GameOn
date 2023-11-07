@@ -12,7 +12,7 @@ let formValid = true;
 
 function addActiveClassLink() {
   links.forEach((link) => {
-    link.addEventListener("click", function (e) {
+    link.addEventListener("click", function () {
       links.forEach(function (link) {
         link.classList.remove("active");
       });
@@ -41,8 +41,8 @@ btnSignup.forEach((btn) => btn.addEventListener("click", () => {
   window.scrollTo({
     top: 0,
     behavior: 'smooth'
-  })
-  launchModal()
+  });
+  launchModal();
 }));
 
 // close modal event and reset form
@@ -101,7 +101,7 @@ function validateBirthdate() {
   const birthdate = document.getElementById("birthdate");
   // limit birthdate to 1924-01-01
   const birthdateRegex = /^(19[2-9][4-9]|20[0-9]{2})-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])$/;
-  const isValid = birthdateRegex.test(birthdate.value) && birthdate.value !== "" && birthdate.value < dateOfTheDay()
+  const isValid = birthdateRegex.test(birthdate.value) && birthdate.value !== "" && birthdate.value < dateOfTheDay();
   const parentFormData = birthdate.closest(".formData");
 
   parentFormData.dataset.error = isValid ? "" : "Veuillez entrer une date de naissance";
@@ -157,7 +157,7 @@ function congrats() {
   div.appendChild(divText);
   const btn = document.createElement("button");
   btn.classList.add("btn-submit");
-  btn.addEventListener("click", closeModal)
+  btn.addEventListener("click", closeModal);
   btn.textContent = "Fermer";
   modalBody.appendChild(btn);
 }
@@ -169,12 +169,12 @@ form.addEventListener("submit", (e) => {
   formValid = true;
 
   validateFields("first", "Le prénom doit contenir au moins 2 caractères");
-  validateFields("last", "Le nom doit contenir au moins 2 caractères")
-  validateEmail()
-  validateBirthdate()
-  validateQuantity()
+  validateFields("last", "Le nom doit contenir au moins 2 caractères");
+  validateEmail();
+  validateBirthdate();
+  validateQuantity();
   validateLocation();
-  validateConditions()
+  validateConditions();
 
   // if all fields are valid, display congrats message
   formValid ? congrats() : null;

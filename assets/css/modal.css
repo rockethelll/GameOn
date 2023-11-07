@@ -228,7 +228,6 @@ main {
     align-items: center;
     height: 750px;
     margin: auto 0;
-
 }
 
 .modal-text {
@@ -527,6 +526,7 @@ footer {
         opacity: 0;
         transform: translateY(-150px);
     }
+
     to {
         opacity: 1;
     }
@@ -537,6 +537,7 @@ footer {
         opacity: 0;
         transform: translateY(-100px);
     }
+
     to {
         opacity: 1;
     }
