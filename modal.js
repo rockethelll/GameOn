@@ -64,7 +64,12 @@ function updateFormValid(isValid) {
   formValid = isValid ? formValid : false;
 }
 
-// Check validity of fields name and lastname
+function displayErrorMessage(isValid,element, errorMessage) {
+  element.dataset.error = isValid ? "" : errorMessage;
+  element.dataset.errorVisible = isValid ? "false" : "true";
+}
+
+// Check validity of fields (used for name and lastname)
 function validateFields(inputId, errorMessage) {
   const input = document.getElementById(inputId);
   const regex = /^[a-zA-Z-éèïëëî ]{2,}$/;
@@ -73,11 +78,18 @@ function validateFields(inputId, errorMessage) {
   // Closest() return the first parent element
   const parentFormData = input.closest(".formData");
 
-  parentFormData.dataset.error = isValid ? "" : errorMessage;
-  parentFormData.dataset.errorVisible = isValid ? "false" : "true";
+  displayErrorMessage(isValid, parentFormData, errorMessage)
 
   // If one field is not valid, formValid = false
   updateFormValid(isValid);
+}
+
+function validateFirstname() {
+  validateFields("first", "Le prénom doit contenir au moins 2 caractères")
+}
+
+function validateLastname() {
+  validateFields("last", "Le nom doit contenir au moins 2 caractères")
 }
 
 // Check if email is valid, if not display an error message
@@ -88,8 +100,7 @@ function validateEmail() {
 
   const parentFormData = email.closest(".formData");
 
-  parentFormData.dataset.error = isValid ? "" : "Veuillez entrer une adresse email valide";
-  parentFormData.dataset.errorVisible = isValid ? "false" : "true";
+  displayErrorMessage(isValid, parentFormData, "Veuillez entrer une adresse email valide")
 
   updateFormValid(isValid);
 }
@@ -106,14 +117,22 @@ function dateOfTheDay() {
 // Check if birthdate is valid, if not display an error message
 function validateBirthdate() {
   const birthdate = document.getElementById("birthdate");
+  
   // limit birthdate to 1924-01-01
   const birthdateRegex = /^(19[2-9][4-9]|20[0-9]{2})-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])$/;
-  const isValid = birthdateRegex.test(birthdate.value) && birthdate.value !== "" && birthdate.value < dateOfTheDay();
+  
+  // Check if date is YYYY-02-30, 30 february not exist
+  const invalidBirthdateRegex = /^(19[2-9][4-9]|20[0-9]{2})-(02)-(30)$/;
+  const isEmpty = ""
+  const isValidFormat = birthdateRegex.test(birthdate.value) && !invalidBirthdateRegex.test(birthdate.value);
+  const isNotPastDate = birthdate.value < dateOfTheDay();
+  
+  const isValid = !isEmpty && isValidFormat && isNotPastDate;
+  
   const parentFormData = birthdate.closest(".formData");
 
-  parentFormData.dataset.error = isValid ? "" : "Veuillez entrer une date de naissance";
-  parentFormData.dataset.errorVisible = isValid ? "false" : "true";
-
+  displayErrorMessage(isValid, parentFormData, "Veuillez entrer une date de naissance")
+  
   updateFormValid(isValid);
 }
 
@@ -124,8 +143,7 @@ function validateTurnamentsQuantity() {
 
   const parentFormData = quantity.closest(".formData");
 
-  parentFormData.dataset.error = isValid ? "" : "Veuillez entrer un nombre valide";
-  parentFormData.dataset.errorVisible = isValid ? "false" : "true";
+  displayErrorMessage(isValid, parentFormData, "Veuillez entrer un nombre valide")
 
   updateFormValid(isValid);
 }
@@ -137,9 +155,8 @@ function validateLocation() {
 
   // some() return true if at least one radio is checked
   const isValid = [...locationArray].some(radio => radio.checked);
-
-  location.dataset.error = isValid ? "" : "Veuillez choisir une ville";
-  location.dataset.errorVisible = isValid ? "false" : "true";
+  
+  displayErrorMessage(isValid, location, "Veuillez choisir une ville")
 
   updateFormValid(isValid);
 }
@@ -150,8 +167,7 @@ function validateConditions() {
   const conditions = document.getElementById("checkbox1");
   const isValid = conditions.checked;
 
-  conditionsDiv.dataset.error = isValid ? "" : "Veuillez accepter les conditions d'utilisation";
-  conditionsDiv.dataset.errorVisible = isValid ? "false" : "true";
+  displayErrorMessage(isValid, conditionsDiv, "Veuillez accepter les conditions d'utilisation")
 
   updateFormValid(isValid);
 }
@@ -179,8 +195,8 @@ form.addEventListener("submit", (e) => {
 
   formValid = true;
 
-  validateFields("first", "Le prénom doit contenir au moins 2 caractères");
-  validateFields("last", "Le nom doit contenir au moins 2 caractères");
+  validateFirstname();
+  validateLastname();
   validateEmail();
   validateBirthdate();
   validateTurnamentsQuantity();
