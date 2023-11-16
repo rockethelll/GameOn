@@ -10,6 +10,7 @@ const menuBurger = document.querySelector(".icon");
 const navLinks = document.querySelector(".nav-links");
 let formValid = true;
 
+// Add class active to all links on navbar
 function addActiveClassLink() {
   links.forEach((link) => {
     link.addEventListener("click", function () {
@@ -33,10 +34,9 @@ menuBurger.addEventListener("click", () => {
 // display modal form
 function launchModal() {
   modalbg.style.display = "block";
-  form.reset();
 }
 
-// launch modal event
+// Launch modal event
 btnSignup.forEach((btn) => btn.addEventListener("click", () => {
   window.scrollTo({
     top: 0,
@@ -45,25 +45,29 @@ btnSignup.forEach((btn) => btn.addEventListener("click", () => {
   launchModal();
 }));
 
-// close modal event and reset form
+// Close modal 
 function closeModal() {
   modalbg.style.display = "none";
-  form.reset();
+}
+
+// Close modal and reload form when submit
+function closeModalOnSubmit() {
+  modalbg.style.display = "none";
   window.location.reload();
 }
 
-// close modal form
+// Close modal form
 btnClose.addEventListener("click", closeModal);
 
-// function to update formValid in order to display congrats message
+// Function to update formValid in order to display congrats message
 function updateFormValid(isValid) {
   formValid = isValid ? formValid : false;
 }
 
-// check validity of fields name and lastname
+// Check validity of fields name and lastname
 function validateFields(inputId, errorMessage) {
   const input = document.getElementById(inputId);
-  const regex = /^[a-zA-Z-éèïëëî]{2,}$/;
+  const regex = /^[a-zA-Z-éèïëëî ]{2,}$/;
   const isValid = regex.test(input.value);
 
   // Closest() return the first parent element
@@ -72,10 +76,11 @@ function validateFields(inputId, errorMessage) {
   parentFormData.dataset.error = isValid ? "" : errorMessage;
   parentFormData.dataset.errorVisible = isValid ? "false" : "true";
 
-  // if one field is not valid, formValid = false
+  // If one field is not valid, formValid = false
   updateFormValid(isValid);
 }
 
+// Check if email is valid, if not display an error message
 function validateEmail() {
   const email = document.getElementById("email");
   const emailRegex = /^[a-z0-9._-]+@[a-z0-9.-]+\.[a-z]{2,}$/i;
@@ -89,6 +94,7 @@ function validateEmail() {
   updateFormValid(isValid);
 }
 
+// Get the date of the day, return on format YYYY-MM-DD
 function dateOfTheDay() {
   const today = new Date();
   const year = today.getFullYear();
@@ -97,6 +103,7 @@ function dateOfTheDay() {
   return `${year}-${month}-${day}`;
 }
 
+// Check if birthdate is valid, if not display an error message
 function validateBirthdate() {
   const birthdate = document.getElementById("birthdate");
   // limit birthdate to 1924-01-01
@@ -110,9 +117,10 @@ function validateBirthdate() {
   updateFormValid(isValid);
 }
 
-function validateQuantity() {
+// Check if number of turnaments field is not empty, if empty display an error message
+function validateTurnamentsQuantity() {
   const quantity = document.getElementById("quantity");
-  const isValid = quantity.value > 0 && quantity.value !== "";
+  const isValid = quantity.value >= 0 && quantity.value !== "";
 
   const parentFormData = quantity.closest(".formData");
 
@@ -122,6 +130,7 @@ function validateQuantity() {
   updateFormValid(isValid);
 }
 
+// Check if location is checked, if not display an error message
 function validateLocation() {
   const location = document.querySelector(".location");
   const locationArray = form.elements.location;
@@ -135,6 +144,7 @@ function validateLocation() {
   updateFormValid(isValid);
 }
 
+// Check if Generals Conditions is checked, if not display an error message
 function validateConditions() {
   const conditionsDiv = document.querySelector(".conditions");
   const conditions = document.getElementById("checkbox1");
@@ -146,6 +156,7 @@ function validateConditions() {
   updateFormValid(isValid);
 }
 
+// Display a congrats message (display when form is submit)
 function congrats() {
   modalBody.innerHTML = "";
   const div = document.createElement("div");
@@ -157,7 +168,7 @@ function congrats() {
   div.appendChild(divText);
   const btn = document.createElement("button");
   btn.classList.add("btn-submit");
-  btn.addEventListener("click", closeModal);
+  btn.addEventListener("click", closeModalOnSubmit);
   btn.textContent = "Fermer";
   modalBody.appendChild(btn);
 }
@@ -172,7 +183,7 @@ form.addEventListener("submit", (e) => {
   validateFields("last", "Le nom doit contenir au moins 2 caractères");
   validateEmail();
   validateBirthdate();
-  validateQuantity();
+  validateTurnamentsQuantity();
   validateLocation();
   validateConditions();
 
